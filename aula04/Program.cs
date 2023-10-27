@@ -57,8 +57,9 @@ int idade = CalcularIdade(dataNascimento, hoje);
 int anosRestante = (105 - idade);
 Console.WriteLine($"Idade atual: {idade}");
 Console.WriteLine($"Anos de vida restante: {anosRestante}");
-Console.WriteLine(hoje.AddYears(anosRestante).ToShortDateString());
+Console.WriteLine($"Ultimo dia de vida {hoje.AddYears(anosRestante).ToShortDateString()}");
 
+Console.ReadLine();
 
 
 int CalcularIdade(DateTime dataNascimento, DateTime hoje)
@@ -86,7 +87,6 @@ DateTime converteData(string dataNascimento)
 
     }
 }
-
 
 
 
