@@ -43,26 +43,24 @@ Console.WriteLine("Informe deu nome: ");
 
 string nome = Console.ReadLine();
 
+Console.WriteLine("Informe sua data de nascimento EX: dd/MM/yyyy: ");
 
-Console.WriteLine("Informe sua data de nascimento: ");
 
 
-string dataNascimentoInput = Console.ReadLine();
-
-DateTime dataNascimento = converteData(dataNascimentoInput);
+DateTime dataNascimento = getDataNascimento();
 
 
 DateTime hoje = DateTime.Now;
-int idade = CalcularIdade(dataNascimento, hoje);
+int idade = getIdade(dataNascimento, hoje);
 int anosRestante = (105 - idade);
-Console.WriteLine($"Idade atual: {idade}");
-Console.WriteLine($"Anos de vida restante: {anosRestante}");
-Console.WriteLine($"Ultimo dia de vida {hoje.AddYears(anosRestante).ToShortDateString()}");
+Console.WriteLine($"{nome} você tem {idade} anos");
+Console.WriteLine($"Tempo de vida restante até completar 105 anos: {anosRestante}");
+Console.WriteLine($"Ultimo dia de vida: {hoje.AddYears(anosRestante).ToShortDateString()}");
 
 Console.ReadLine();
 
 
-int CalcularIdade(DateTime dataNascimento, DateTime hoje)
+int getIdade(DateTime dataNascimento, DateTime hoje)
 {
     int idade = 0;
     idade = (hoje.Year - dataNascimento.Year);
@@ -75,17 +73,22 @@ int CalcularIdade(DateTime dataNascimento, DateTime hoje)
 }
 
 
-DateTime converteData(string dataNascimento)
+DateTime getDataNascimento()
 {
-    try
+    while (true)
     {
-       return DateTime.Parse(dataNascimento);
+        string dataNascimentoInput = Console.ReadLine();
+        try
+        {
+            return DateTime.Parse(dataNascimentoInput);
+        }
+        catch
+        {
+            Console.WriteLine("Data invalida!\nInforme uma data no formado. EX: dd/MM/yyyy");
+            //throw new ArgumentException("Informe uma data valida");
+        }
     }
-    catch
-    {
-        throw new ArgumentException("Idade deve ser um valor numerico EX: 25 ");
-
-    }
+   
 }
 
 
