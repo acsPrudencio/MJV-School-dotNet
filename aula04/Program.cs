@@ -39,25 +39,14 @@ Console.WriteLine( retornoXpto );
 //calcular ate q dia estarei vivo
 
 
-Console.WriteLine("Informe deu nome: ");
-
-string nome = Console.ReadLine();
-
-Console.WriteLine("Informe sua data de nascimento EX: dd/MM/yyyy: ");
 
 
-
+var nome = getName();
 DateTime dataNascimento = getDataNascimento();
-
-
 DateTime hoje = DateTime.Now;
 int idade = getIdade(dataNascimento, hoje);
-int anosRestante = (105 - idade);
-Console.WriteLine($"{nome} você tem {idade} anos");
-Console.WriteLine($"Tempo de vida restante até completar 105 anos: {anosRestante}");
-Console.WriteLine($"Ultimo dia de vida: {hoje.AddYears(anosRestante).ToShortDateString()}");
-
-Console.ReadLine();
+var anosRestante = getYeasRemaining(idade);
+showInfo(nome, idade, anosRestante, hoje);
 
 
 int getIdade(DateTime dataNascimento, DateTime hoje)
@@ -75,23 +64,49 @@ int getIdade(DateTime dataNascimento, DateTime hoje)
 
 DateTime getDataNascimento()
 {
+    Console.WriteLine("Informe sua data de nascimento EX: dd/MM/yyyy: ");
     while (true)
     {
-        string dataNascimentoInput = Console.ReadLine();
         try
         {
-            return DateTime.Parse(dataNascimentoInput);
+            return DateTime.Parse(Console.ReadLine());
         }
         catch
         {
             Console.WriteLine("Data invalida!\nInforme uma data no formado. EX: dd/MM/yyyy");
-            //throw new ArgumentException("Informe uma data valida");
         }
     }
    
 }
 
 
+string getName()
+{
+    while (true)
+    {
+        Console.WriteLine("Digite seu nome ");
 
+        string nome = Console.ReadLine();
+        if (string.IsNullOrWhiteSpace(nome))
+        {
+            Console.WriteLine("Nome invalido!\n");
+        }else {
+            return nome;
+        }
+    }
+}
+
+int getYeasRemaining(int i)
+{
+    int anosRestante1 = (100 - i);
+    return anosRestante1;
+}
+
+void showInfo(string nome, int idade, int i1, DateTime hoje)
+{
+    Console.WriteLine($"{nome} você tem {idade} anos");
+    Console.WriteLine($"Tempo de vida restante até completar 100 anos: {anosRestante}");
+    Console.WriteLine($"Ultimo dia de vida: {hoje.AddYears(i1).ToShortDateString()}");
+}
 
 
