@@ -38,15 +38,35 @@ Console.WriteLine( retornoXpto );
 //    dataNascimento
 //calcular ate q dia estarei vivo
 
+int contador = 0;
+List<Pessoa> pessoas = new List<Pessoa>();
+int idade = 0;
+var anosRestante = 0;
+
+
+while(contador < 3 ){
+    Console.WriteLine("\n\n\n\n\n\n\n");
+
+    var nome = getName();
+    DateTime dataNascimento = getDataNascimento();
+    DateTime hoje = DateTime.Now;
+    idade = getIdade(dataNascimento, hoje);
+    anosRestante = getYeasRemaining(idade);
+    showInfo(nome, idade, anosRestante, hoje);
+    addPessoaToList(nome, idade, anosRestante, hoje, pessoas);
+    contador++;
+}
+
+Console.WriteLine("\n\n\n\n\n\n\n\n\n\n");
+
+foreach (var pessoa in pessoas)
+{
+    showInfo(pessoa.nome, pessoa.idade, pessoa.anosRestante, pessoa.dataDoCalculo);
+    Console.WriteLine("\n");
+}
 
 
 
-var nome = getName();
-DateTime dataNascimento = getDataNascimento();
-DateTime hoje = DateTime.Now;
-int idade = getIdade(dataNascimento, hoje);
-var anosRestante = getYeasRemaining(idade);
-showInfo(nome, idade, anosRestante, hoje);
 
 
 int getIdade(DateTime dataNascimento, DateTime hoje)
@@ -84,6 +104,7 @@ string getName()
 {
     while (true)
     {
+
         Console.WriteLine("Digite seu nome ");
 
         string nome = Console.ReadLine();
@@ -107,6 +128,16 @@ void showInfo(string nome, int idade, int i1, DateTime hoje)
     Console.WriteLine($"{nome} você tem {idade} anos");
     Console.WriteLine($"Tempo de vida restante até completar 100 anos: {anosRestante}");
     Console.WriteLine($"Ultimo dia de vida: {hoje.AddYears(i1).ToShortDateString()}");
+}
+
+void addPessoaToList(string nome, int idade, int anosRestante, DateTime hoje, List<Pessoa> pessoas)
+{
+    Pessoa p = new Pessoa();
+    p.nome = nome;
+    p.idade = idade;
+    p.anosRestante = anosRestante;
+    p.dataDoCalculo = hoje;
+    pessoas.Add(p);
 }
 
 
